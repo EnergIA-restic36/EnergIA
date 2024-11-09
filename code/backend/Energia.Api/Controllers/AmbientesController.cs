@@ -32,7 +32,7 @@ namespace Energia.Api.Controllers
             return Ok(ambienteBd);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Atualizar(int id, AmbienteDto ambiente)
         {
             var ambienteBd = await _ambienteRepository.GetById(id);
@@ -45,7 +45,7 @@ namespace Energia.Api.Controllers
             return Ok(ambienteBd);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Excluir(int id)
         {
             if (id == 0)

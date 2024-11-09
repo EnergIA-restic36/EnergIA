@@ -32,7 +32,7 @@ namespace Energia.Api.Controllers
             return Ok(tipoDispositivoBd);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Atualizar(int id, TipoDispositivoDto tipoDispositivo)
         {
             var tipoDispositivoBd = await _tipoDispositivoRepository.GetById(id);
@@ -45,7 +45,7 @@ namespace Energia.Api.Controllers
             return Ok(tipoDispositivoBd);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Excluir(int id)
         {
             if (id == 0)

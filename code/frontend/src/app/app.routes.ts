@@ -1,13 +1,18 @@
 import { Routes } from '@angular/router';
-import { AmbientesComponent } from './ambientes/ambientes.component';
+import { AmbienteComponent } from './ambiente/lista/lista.component';
+import { TipoDispositivoComponent } from './tipo-dispositivo/lista/lista.component';
 
 export const routes: Routes = [
     {
         path: '',
-        component: AmbientesComponent
+        component: AmbienteComponent
     },
     {
         path: 'ambientes',
-        component: AmbientesComponent
+        component: AmbienteComponent
+    },
+    {
+        path: 'tipos-de-dispositivo',
+        component: TipoDispositivoComponent
     }
 ];
