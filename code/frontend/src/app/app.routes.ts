@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
-import { AmbientesComponent } from './ambientes/ambientes.component';
+import { AmbienteComponent } from './ambiente/lista/lista.component';
 
 export const routes: Routes = [
     {
         path: '',
-        component: AmbientesComponent
+        component: AmbienteComponent
     },
     {
         path: 'ambientes',
-        component: AmbientesComponent
+        component: AmbienteComponent
     }
 ];
