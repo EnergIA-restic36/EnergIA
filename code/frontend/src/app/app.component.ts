@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     title = 'frontend';
     items: MenuItem[] = [
         { label: 'Ambientes', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/ambientes'] },
-        { label: 'Tipos de Dispositivos', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/tipos-dispositivos'] },
+        { label: 'Tipos de Dispositivos', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/tipos-de-dispositivo'] },
         { label: 'Dispositivos', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/dispositivos'] },
         { label: 'Consumos', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/consumos'] }
     ]

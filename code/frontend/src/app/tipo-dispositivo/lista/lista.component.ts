@@ -1,31 +1,30 @@
 import { Component, inject, signal, viewChild } from '@angular/core';
 
-
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { Ambiente } from '../models/ambiente';
-import { AmbienteInclusaoComponent } from '../inclusao/inclusao.component';
-import { AmbienteAlteracaoComponent } from '../alteracao/alteracao.compomente';
-import { AmbienteService } from '../ambiente.service';
+import { TipoDispositivo } from '../models/tipo-dispositivo';
+import { TipoDispositivoService } from '../tipo-dispositivo.service';
 import { NgxUiLoaderModule, NgxUiLoaderService } from 'ngx-ui-loader';
+import { TipoDispositivoInclusaoComponent } from '../inclusao/inclusao.component';
+import { TipoDispositivoAlteracaoComponent } from '../alteracao/alteracao.compomente';
 
-@Component({
+@Component({    
     standalone: true,
-    imports: [CommonModule, ButtonModule, TableModule, DialogModule, AmbienteInclusaoComponent, ToastModule, AmbienteAlteracaoComponent, NgxUiLoaderModule],
+    imports: [CommonModule, ButtonModule, TableModule, DialogModule, ToastModule, NgxUiLoaderModule, TipoDispositivoInclusaoComponent, TipoDispositivoAlteracaoComponent],
     providers: [MessageService],
     templateUrl: './lista.component.html',
     styleUrl: './lista.component.css'
 })
-export class AmbienteComponent {
-    ambienteInclusao = viewChild.required(AmbienteInclusaoComponent);
-    ambienteAlteracao = viewChild.required(AmbienteAlteracaoComponent);
-    ambienteService = inject(AmbienteService);
-    ambientes = signal<Ambiente[]>([]);
-    ambiente = signal<Ambiente>({id: 0, nome: ""});
+export class TipoDispositivoComponent {    
+    tipoDispositivoInclusao = viewChild.required(TipoDispositivoInclusaoComponent);
+    tipoDispositivoAlteracao = viewChild.required(TipoDispositivoAlteracaoComponent);
+    tipoDispositivoService = inject(TipoDispositivoService);
+    tiposDispositivo = signal<TipoDispositivo[]>([]);
+    tipoDispositivo = signal<TipoDispositivo>({id: 0, nome: ""});
     errorsMessage = signal<string[]>([]);
     dialogVisible = signal(false);
     modalInclusao = signal(false);    
@@ -40,9 +39,9 @@ export class AmbienteComponent {
     }
 
     atualizarDados() {
-        this.ambienteService.obterTodos()
+        this.tipoDispositivoService.obterTodos()
         .subscribe({
-            next: (retorno) => { this.ambientes.set(retorno) },
+            next: (retorno) => { this.tiposDispositivo.set(retorno) },
             complete: () => { this.ngxService.stop() },
             error: (e) => { this.processarFalha(e) }
         });
@@ -53,20 +52,19 @@ export class AmbienteComponent {
         this.modalAlteracao.set(false);
     }
 
-    editar(ambiente: Ambiente) {
-        this.ambiente.set({ ...ambiente });
+    editar(tipoDipositivo: TipoDispositivo) {
+        this.tipoDispositivo.set({ ...tipoDipositivo });
         this.modalAlteracao.set(true);
     }
 
-    excluir(ambiente: Ambiente) {
-        this.ambiente.set({...ambiente})
+    excluir(tipoDipositivo: TipoDispositivo) {
+        this.tipoDispositivo.set({...tipoDipositivo})
         this.modalExclusao.set(true);
     }
-
     
     processarInclusao(resultado: any) {
         if (resultado.sucesso) {        
-            this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Ambiente incluído com sucesso!', life: 3000 });
+            this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Tipo de dispositivo incluído com sucesso!', life: 3000 });
             this.hideDialog();
             this.atualizarDados();
             return;
@@ -76,7 +74,7 @@ export class AmbienteComponent {
 
     processarAlteracao(resultado: any) {        
         if (resultado.sucesso) {
-            this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Ambiente alterado com sucesso!', life: 3000 });
+            this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Tipo de dispositivo alterado com sucesso!', life: 3000 });
             this.hideDialog();
             this.atualizarDados();
             return;
@@ -86,9 +84,9 @@ export class AmbienteComponent {
 
     confirmarExclusao() {
         this.modalExclusao.set(false);
-        this.ambienteService.excluir(this.ambiente().id).subscribe({
+        this.tipoDispositivoService.excluir(this.tipoDispositivo().id).subscribe({
             next: () => {
-                this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Ambiente excluído com sucesso!', life: 3000 });
+                this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Tipo de dispositivo excluído com sucesso!', life: 3000 });
                 this.atualizarDados()
             },
             error: (e) => {this.processarFalha(e)}

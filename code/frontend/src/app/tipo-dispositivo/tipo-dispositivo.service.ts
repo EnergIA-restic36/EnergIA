@@ -1,34 +1,34 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
-import { Ambiente } from "./models/ambiente";
 import { environment } from "../../environments/environment";
 import { catchError, first } from "rxjs";
 import { BaseService } from "../services/base.service";
+import { TipoDispositivo } from "./models/tipo-dispositivo";
 
 @Injectable({
     providedIn: 'root'
 })
-export class AmbienteService extends BaseService {
+export class TipoDispositivoService extends BaseService {
     private urlApi = environment.urlApi;
     private http = inject(HttpClient);
 
     obterTodos() {
-        return this.http.get<Ambiente[]>(`${this.urlApi}ambientes`)
+        return this.http.get<TipoDispositivo[]>(`${this.urlApi}tiposdispositivo`)
             .pipe(
                 catchError(this.serviceError),
                 first());
     }
 
-    incluir(ambiente: Ambiente) {
-        return this.http.post<Ambiente>(`${this.urlApi}ambientes`, ambiente)
+    incluir(tipoDipositivo: TipoDispositivo) {
+        return this.http.post<TipoDispositivo>(`${this.urlApi}tiposdispositivo`, tipoDipositivo)
             .pipe(
                 catchError(this.serviceError),
                 first()
             );
     }
 
-    alterar(ambiente: Ambiente) {
-        return this.http.put<Ambiente>(`${this.urlApi}ambientes/${ambiente.id}`, ambiente)
+    alterar(tipoDipositivo: TipoDispositivo) {
+        return this.http.put<TipoDispositivo>(`${this.urlApi}tiposdispositivo/${tipoDipositivo.id}`, tipoDipositivo)
         .pipe(
             catchError(this.serviceError),
             first()
@@ -36,7 +36,7 @@ export class AmbienteService extends BaseService {
     }
 
     excluir(id: number) {
-        return this.http.delete<Ambiente>(`${this.urlApi}ambientes/${id}`)
+        return this.http.delete<TipoDispositivo>(`${this.urlApi}tiposdispositivo/${id}`)
         .pipe(
             catchError(this.serviceError),
             first()
