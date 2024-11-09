@@ -1,0 +1,6 @@
+@Energia.Api_HostAddress = http://localhost:5262
+
+GET {{Energia.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

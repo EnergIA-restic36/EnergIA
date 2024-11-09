@@ -1,0 +1,6 @@
+@Energia.WebSocket_HostAddress = http://localhost:5086
+
+GET {{Energia.WebSocket_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

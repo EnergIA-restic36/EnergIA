@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35209.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energia.WebSocket", "Energia.WebSocket\Energia.WebSocket.csproj", "{233373B3-8213-417D-9F09-69867EFF8560}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energia.SensorMock", "Energia.SensorMock\Energia.SensorMock.csproj", "{99C7C16C-6C0D-4BB8-89FA-AE96F57712A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Energia.Api", "Energia.Api\Energia.Api.csproj", "{0103A80F-FE44-4099-88A8-DAAC6911FA5B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{233373B3-8213-417D-9F09-69867EFF8560}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{233373B3-8213-417D-9F09-69867EFF8560}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{233373B3-8213-417D-9F09-69867EFF8560}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{233373B3-8213-417D-9F09-69867EFF8560}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99C7C16C-6C0D-4BB8-89FA-AE96F57712A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99C7C16C-6C0D-4BB8-89FA-AE96F57712A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99C7C16C-6C0D-4BB8-89FA-AE96F57712A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99C7C16C-6C0D-4BB8-89FA-AE96F57712A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0103A80F-FE44-4099-88A8-DAAC6911FA5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0103A80F-FE44-4099-88A8-DAAC6911FA5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0103A80F-FE44-4099-88A8-DAAC6911FA5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0103A80F-FE44-4099-88A8-DAAC6911FA5B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {57703AE8-3503-4E31-AE84-67067D23D494}
+	EndGlobalSection
+EndGlobal
