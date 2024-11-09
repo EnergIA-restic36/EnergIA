@@ -1,0 +1,14 @@
+<table>
+    <thead>
+        <th>Id</th>
+        <th>Nome</th>
+    </thead>
+    <tbody>
+        @for (ambiente of ambientes$ | async; track $index) {
+            <tr>
+                <td>{{ambiente.id}}</td>
+                <td>{{ambiente.nome}}</td>
+            </tr>
+        }
+    </tbody>
+</table>
