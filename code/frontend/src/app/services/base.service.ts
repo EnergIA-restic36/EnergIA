@@ -4,7 +4,6 @@ import { of, throwError } from "rxjs";
 export abstract class BaseService {
     protected serviceError(response: Response | any) {
         let customError: string[] = [];
-        debugger
         if (response instanceof HttpErrorResponse) {
             
             if (response.statusText === "Unknown Error") {

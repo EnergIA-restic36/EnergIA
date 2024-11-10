@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSignalR();
+builder.Services.AddCors();
 builder.Services.AddDbContext<EnergiaDbContext>();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -25,8 +26,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
 app.UseHttpsRedirection();
+
+app.UseCors(p =>
+{
+    p.WithOrigins("http://localhost:4200")
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials();
+});
 
 app.MapHub<EnergiaHub>("/energiaHub");
 

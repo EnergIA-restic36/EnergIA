@@ -5,7 +5,7 @@ namespace Energia.SensorMock
 {
     public class Worker(ILogger<Worker> logger, IConfiguration configuration) : IHostedService, IDisposable
     {
-        private int dispositivoId = 1;
+        private string dispositivoId = Guid.NewGuid().ToString();
         private int padraoConsumo = 1;
 
         private Timer? _timer = null;
@@ -19,11 +19,13 @@ namespace Energia.SensorMock
             var random = new Random();
 
             if (configuration["id"] is not null)
-                dispositivoId = Convert.ToInt32(configuration["id"]);
+                dispositivoId = configuration["id"].ToString();
 
             padraoConsumo = random.Next(1, 3); //1-baixo; 2=normal; 3-alto
 
             await _connection.StartAsync(cancellationToken);
+            await _connection.InvokeAsync("NovoDispositivo", dispositivoId, _connection.ConnectionId);
+
             logger.LogInformation("Conexão com o Hub estabelecida.");
             _timer = new Timer(EnviarDados, null, TimeSpan.Zero, TimeSpan.FromSeconds(10));
         }
