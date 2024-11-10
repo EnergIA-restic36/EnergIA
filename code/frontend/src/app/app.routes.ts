@@ -1,11 +1,13 @@
 import { Routes } from '@angular/router';
 import { AmbienteComponent } from './ambiente/lista/lista.component';
 import { TipoDispositivoComponent } from './tipo-dispositivo/lista/lista.component';
+import { DispositivoComponent } from './dispositivo/lista/lista.component';
+import { ConsumoComponent } from './consumo/lista/lista.component';
 
 export const routes: Routes = [
     {
         path: '',
-        component: AmbienteComponent
+        redirectTo: 'ambientes', pathMatch: 'full'
     },
     {
         path: 'ambientes',
@@ -14,5 +16,13 @@ export const routes: Routes = [
     {
         path: 'tipos-de-dispositivo',
         component: TipoDispositivoComponent
+    },
+    {
+        path: 'dispositivos',
+        component: DispositivoComponent
+    },
+    {
+        path: 'consumos',
+        component: ConsumoComponent
     }
 ];

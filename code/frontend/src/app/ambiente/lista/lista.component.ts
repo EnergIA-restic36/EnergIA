@@ -18,7 +18,7 @@ import { NgxUiLoaderModule, NgxUiLoaderService } from 'ngx-ui-loader';
     imports: [CommonModule, ButtonModule, TableModule, DialogModule, AmbienteInclusaoComponent, ToastModule, AmbienteAlteracaoComponent, NgxUiLoaderModule],
     providers: [MessageService],
     templateUrl: './lista.component.html',
-    styleUrl: './lista.component.css'
+    styleUrl: './lista.component.scss'
 })
 export class AmbienteComponent {
     ambienteInclusao = viewChild.required(AmbienteInclusaoComponent);

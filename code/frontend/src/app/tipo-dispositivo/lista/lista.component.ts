@@ -17,7 +17,7 @@ import { TipoDispositivoAlteracaoComponent } from '../alteracao/alteracao.compom
     imports: [CommonModule, ButtonModule, TableModule, DialogModule, ToastModule, NgxUiLoaderModule, TipoDispositivoInclusaoComponent, TipoDispositivoAlteracaoComponent],
     providers: [MessageService],
     templateUrl: './lista.component.html',
-    styleUrl: './lista.component.css'
+    styleUrl: './lista.component.scss'
 })
 export class TipoDispositivoComponent {    
     tipoDispositivoInclusao = viewChild.required(TipoDispositivoInclusaoComponent);

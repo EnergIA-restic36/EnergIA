@@ -2,7 +2,7 @@
 <p-toast position="top-center"></p-toast>
 
 <div class="buttonAdd">
-    <p-button icon="pi pi-plus" styleClass="p-button-rounded p-button-success" (click)="modalInclusao.set(true)"></p-button>
+    <button pButton icon="pi pi-plus" type="button" class="p-button-success" (click)="modalInclusao.set(true)"></button>
 </div>
 
 <p-table [value]="ambientes()" styleClass="p-datatable-striped p-datatable-gridlines">
