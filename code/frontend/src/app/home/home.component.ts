@@ -4,20 +4,22 @@ import { MenuItem, PrimeNGConfig } from 'primeng/api';
 import { TabMenuModule } from 'primeng/tabmenu';
 
 @Component({
-    selector: 'app-root',
+    selector: 'app-home',
     standalone: true,
     imports: [RouterOutlet, TabMenuModule],
-    styleUrl: './app.component.scss',
     template: `
-        <router-outlet></router-outlet>
+        <p-tabMenu [model]="items"></p-tabMenu>
+        <div style="padding: 20px 20px 0 20px;">
+            <router-outlet></router-outlet>   
+        </div>
   `
 })
-export class AppComponent implements OnInit {
+export class HomeComponent {
     title = 'frontend';
     items: MenuItem[] = [
+        { label: 'Dispositivos', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/dispositivos'] },
         { label: 'Ambientes', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/ambientes'] },
         { label: 'Tipos de Dispositivos', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/tipos-de-dispositivo'] },
-        { label: 'Dispositivos', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/dispositivos'] },
         { label: 'Consumos', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/consumos'] }
     ]
 
