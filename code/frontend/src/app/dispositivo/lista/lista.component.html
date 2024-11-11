@@ -1,0 +1,31 @@
+<div class="dispositivos">
+    @for (item of dispositivos(); track $index) {
+
+    <p-card [style]="{ width: '360px', height: '200px'}">
+        <div class="card">
+            <div>
+                @if (item.online) {
+                <div class="titulo">
+                    <i class="pi pi-circle-on" style="color: green;"></i>
+                    <span>Online</span>
+                </div>
+                } @else {
+                <div class="titulo">
+                    <i class="pi pi-circle-on" style="color: red;"></i>
+                    <span>Offline</span>
+                </div>
+                }
+
+                <div class="detalhes">
+                    <span>{{item.nome}}</span>
+                    <span>{{item.ambiente.nome}}</span>
+                    <span>{{item.tipoDispositivo.nome}}</span>
+                </div>
+            </div>
+            <div class="consumo">
+                <span>{{item.consumo}}</span>
+            </div>
+        </div>
+    </p-card>
+    }
+</div>

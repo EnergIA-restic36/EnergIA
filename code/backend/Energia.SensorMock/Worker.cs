@@ -27,7 +27,7 @@ namespace Energia.SensorMock
             await _connection.InvokeAsync("NovoDispositivo", dispositivoId, _connection.ConnectionId);
 
             logger.LogInformation("Conexão com o Hub estabelecida.");
-            _timer = new Timer(EnviarDados, null, TimeSpan.Zero, TimeSpan.FromSeconds(10));
+            _timer = new Timer(EnviarDados, null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
         }
 
         private async void EnviarDados(object? state)

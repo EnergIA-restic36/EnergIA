@@ -29,7 +29,7 @@ namespace Energia.WebSocket
                 //};
                 //_context.Consumos.Add(consumo);
                 //await _context.SaveChangesAsync();
-
+                await Clients.All.SendAsync("Consumo", dados.DispositivoId, dados.ConsumoMedido);
                 Console.WriteLine($"Dados Recebidos. Consumido {dados.ConsumoMedido} kWh em {dados.Timestamp}.");
 
             }

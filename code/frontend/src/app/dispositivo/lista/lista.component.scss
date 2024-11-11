@@ -1,0 +1,30 @@
+.dispositivos {
+    display: flex;    
+    gap: 10px;
+    flex-wrap: wrap;
+    
+    .titulo {
+        display: flex;
+        gap: 10px;
+    }
+
+    .detalhes {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;        
+    }
+}
+
+.card {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    
+}
+.consumo {
+    font-weight: bold;
+    font-size: 4rem;    
+    align-self: center;
+    margin: auto;
+    color: green;
+}

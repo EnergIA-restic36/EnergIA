@@ -2,7 +2,7 @@
 {
     public class Consumo
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public int DispositivoId { get; set; }
         public Dispositivo Dispositivo { get; set; }
         public double ConsumoMedido { get; set; }
