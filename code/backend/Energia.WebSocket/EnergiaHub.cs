@@ -13,8 +13,10 @@ namespace Energia.WebSocket
 
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
-            _dispositivoConectados.TryRemove(Context.ConnectionId, out _);
-            await Clients.All.SendAsync("DispositivosConectados", _dispositivoConectados.Values.ToList());
+            var dispositivoId = _dispositivoConectados[Context.ConnectionId];
+            _dispositivoConectados.TryRemove(Context.ConnectionId, out _);            
+
+            await Clients.All.SendAsync("DispositivoDesconectado", dispositivoId);
         }
 
         public async Task EnviarConsumo(ConsumoDto dados)
@@ -43,7 +45,7 @@ namespace Energia.WebSocket
         public async Task NovoDispositivo(string dispositivoId, string connectionId)
         {
             _dispositivoConectados[connectionId] = dispositivoId;
-            await Clients.All.SendAsync("DispositivosConectados", _dispositivoConectados.Values.ToList());            
+            await Clients.All.SendAsync("DispositivoConectado", dispositivoId);            
         }
 
         public async Task ObterDispositivosConectados(string connectionId)

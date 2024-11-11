@@ -11,4 +11,5 @@ export interface Dispositivo {
     };
     consumo: number;
     online: boolean;
+    cadastrado: boolean;
 }
