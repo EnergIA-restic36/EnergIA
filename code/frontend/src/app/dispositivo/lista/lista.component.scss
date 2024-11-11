@@ -1,3 +1,21 @@
+@use 'styles' as *;
+
+.buttonAdd {
+    position: fixed;
+    z-index: 999;
+    bottom: 30px;
+    right: 30px;
+
+    button {
+        @extend .bt-add
+    }
+}
+
+.actionButtons {
+    display: flex;
+    justify-content: space-between;
+}
+
 .dispositivos {
     display: flex;    
     gap: 10px;

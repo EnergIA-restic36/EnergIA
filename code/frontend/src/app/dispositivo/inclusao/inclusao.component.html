@@ -1,0 +1,24 @@
+<div class="field">
+    <label for="nome">Id <span class="obrigatorio">*</span></label>
+    <input type="text" pInputText [(ngModel)]="dispositivo().id" required autofocus id="id" [ngClass]="{ 'ng-invalid ng-dirty': submitted() && !dispositivo().nome }" />
+
+    @if (submitted() && !dispositivo().nome) {
+    <small class="p-error block">Informe o nome</small>
+    }
+</div>
+<div class="field">
+    <label for="nome">Nome <span class="obrigatorio">*</span></label>
+    <input type="text" pInputText [(ngModel)]="dispositivo().nome" required autofocus id="nome" [ngClass]="{ 'ng-invalid ng-dirty': submitted() && !dispositivo().nome }" />
+
+    @if (submitted() && !dispositivo().nome) {
+    <small class="p-error block">Informe o nome</small>
+    }
+</div>
+<div class="field">
+    <label for="nome">Ambiente <span class="obrigatorio">*</span></label>
+    <p-dropdown class="p-dropdown-item w-full" [options]="ambientes" appendTo="body" id="ambienteId" placeholder="Selecione um ambiente" optionLabel="nome" optionValue="id"></p-dropdown>        
+</div>
+<div class="field">
+    <label for="nome">Tipo <span class="obrigatorio">*</span></label>
+    <p-dropdown class="p-dropdown-item w-full" [options]="tiposDispositivos" appendTo="body" id="ambienteId" placeholder="Selecione um tipo" optionLabel="nome" optionValue="id"></p-dropdown>        
+</div>

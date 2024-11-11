@@ -4,28 +4,29 @@ import { environment } from "../../environments/environment";
 import { catchError, first } from "rxjs";
 import { BaseService } from "../services/base.service";
 import { Dispositivo } from "./models/dispositivo";
+import { DispositivoInclusao } from "./models/dispositivo-inclusao";
 
 @Injectable({
     providedIn: 'root'
 })
 export class DispositivoService extends BaseService {
-    private urlApi = environment.urlApi;
+    private urlApi = `${environment.urlApi}dispositivos`;
     private http = inject(HttpClient);
 
     obterTodos() {
-        return this.http.get<Dispositivo[]>(`${this.urlApi}dispositivos`)
+        return this.http.get<Dispositivo[]>(this.urlApi)
             .pipe(
                 catchError(this.serviceError),
                 first());
     }
 
-    // incluir(ambiente: Ambiente) {
-    //     return this.http.post<Ambiente>(`${this.urlApi}ambientes`, ambiente)
-    //         .pipe(
-    //             catchError(this.serviceError),
-    //             first()
-    //         );
-    // }
+    incluir(dispositivo: DispositivoInclusao) {
+        return this.http.post<Dispositivo>(this.urlApi, dispositivo)
+            .pipe(
+                catchError(this.serviceError),
+                first()
+            );
+    }
 
     // alterar(ambiente: Ambiente) {
     //     return this.http.put<Ambiente>(`${this.urlApi}ambientes/${ambiente.id}`, ambiente)
