@@ -5,10 +5,12 @@ import { DispositivoConsumo } from "../models/dispositivoConsumo";
 import { DispositivoService } from "../dispositivo.service";
 import { Dispositivo } from "../models/dispositivo";
 import { map } from "rxjs";
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faPlug } from '@fortawesome/free-solid-svg-icons';
+import { TooltipModule } from "primeng/tooltip";
 @Component({
     standalone: true,
-    imports: [CardModule],
+    imports: [CardModule, FontAwesomeModule, TooltipModule],
     templateUrl: './lista.component.html',
     styleUrl: './lista.component.scss'
 })
@@ -16,6 +18,7 @@ export class DispositivoComponent {
     dispositivos = signal<Dispositivo[]>([]);
     dispostivosConectados = signal<DispositivoConsumo[]>([]);
     dispositivoService = inject(DispositivoService);
+    faPlug = faPlug;
 
     connection = new signalR.HubConnectionBuilder()
         .withUrl("https://localhost:7158/energiaHub")
