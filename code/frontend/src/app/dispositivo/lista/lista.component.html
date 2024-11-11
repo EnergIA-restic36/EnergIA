@@ -1,0 +1,70 @@
+<ngx-ui-loader></ngx-ui-loader>
+<p-toast position="top-center"></p-toast>
+
+<div class="buttonAdd">
+    <button pButton icon="pi pi-plus" type="button" class="p-button-success" (click)="modalInclusao.set(true)"></button>
+</div>
+
+<div class="dispositivos">
+    @for (item of dispositivos(); track $index) {
+
+    <p-card [style]="{ width: '200px', height: '150px'}">
+        
+        <div class="card">                       
+                @if (item.online) {
+                    <div class="status">
+                        <i class="pi pi-circle-on" style="color: green;"></i>
+                        @if(item.cadastrado) {
+                            <span [title]=[item.nome]>{{item.nome}}</span>
+                        } @else {
+                            <span [title]=[item.nome]><a href="javascript:void(0);" (click)="abrirModalIncluir(item.id)">{{item.nome}}</a></span>
+                        }
+                    </div>
+                } @else {
+                    <div class="status">
+                        <i class="pi pi-circle-on" style="color: red;"></i>
+                        <span [title]=[item.nome]>{{item.nome}}</span>
+                    </div>
+                }
+
+                @if (item.cadastrado) {
+                    <div class="icone">
+                        <fa-icon [icon]="faPlug"></fa-icon>
+                    </div>
+                }
+                
+                @if (item.online){
+                <div class="consumo">
+                    <span>{{item.consumo}}</span>    
+                    @if (item.cadastrado) {
+                        <span class="unidade"> kWh</span>      
+                    }
+                    
+                </div>
+            }
+        </div>
+    </p-card>
+    }
+</div>
+
+<p-dialog [(visible)]="modalInclusao" [style]="{ width: '450px' }" header="Inclusão de Dispositivo" [modal]="true" class="p-fluid">
+    <ng-template pTemplate="content">
+        <app-dispositivo-inclusao (onSave)="processarInclusao($event)" [dispositivoId]="dispositivoId()" />
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Fechar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Gravar" icon="pi pi-check" class="p-button-text" (click)="dispositivoInclusao().gravar()"></button>
+    </ng-template>
+</p-dialog>
+
+<div class="card flex justify-content-center">
+    <p-dialog header="Ocorreu um Problema" [(visible)]="dialogVisible" [style]="{width: '50vw'}">
+        <table>
+            @for (error of errorsMessage(); track error) {
+            <tr>
+                <td>{{error}}</td>
+            </tr>
+            }
+        </table>
+    </p-dialog>
+</div>

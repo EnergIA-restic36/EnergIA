@@ -98,5 +98,6 @@ export class AmbienteComponent {
     processarFalha(fail: any) {
         this.errorsMessage.set([...fail]);
         this.dialogVisible.set(true);
+        this.ngxService.stop();
     }
 }

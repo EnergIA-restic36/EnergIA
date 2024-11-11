@@ -1,0 +1,70 @@
+@use 'styles' as *;
+
+.buttonAdd {
+    position: fixed;
+    z-index: 999;
+    bottom: 30px;
+    right: 30px;
+
+    button {
+        @extend .bt-add
+    }
+}
+
+.actionButtons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dispositivos {
+    display: flex;    
+    gap: 10px;
+}
+
+:host {
+    ::ng-deep .p-card .p-card-body {
+      padding:  0.5rem;
+      text-align: center;
+    }
+  }
+
+.card {
+    // margin-top: -15px;
+    display: flex;
+    flex-direction: column;    
+    gap: 10px;  
+    color: #3b7bb5;  
+
+    .status {        
+        font-size: 0.9rem;        
+        white-space: nowrap;
+        overflow: hidden;        
+        text-overflow: ellipsis;
+        display:inline-block;
+
+        i {
+            margin-right: 10px;
+            font-size: 0.7rem;
+            align-self: center;
+        }
+    }
+
+    .nome {
+        font-size: 0.9rem;
+    }
+
+    .icone {        
+        text-align: center;
+        font-size: 1.9rem;        
+    }
+
+    .consumo {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+
+        .unidade {
+            font-size: 1.2rem;
+        }
+    }
+}

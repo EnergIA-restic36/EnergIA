@@ -31,11 +31,11 @@ namespace Energia.Api.Context
             );
 
             modelBuilder.Entity<Dispositivo>().HasData(
-                new Dispositivo { Id = 1, Nome = "Linha de Produção 1", AmbienteId = 1, TipoDispositivoId = 1 },
-                new Dispositivo { Id = 2, Nome = "Linha de Produção 2", AmbienteId = 1, TipoDispositivoId = 1 },
-                new Dispositivo { Id = 3, Nome = "Ar Condicionado", AmbienteId = 1, TipoDispositivoId = 1 },
-                new Dispositivo { Id = 4, Nome = "Ar Condicionado", AmbienteId = 2, TipoDispositivoId = 1 },
-                new Dispositivo { Id = 5, Nome = "Lâmpada", AmbienteId = 2, TipoDispositivoId = 1 }
+                new Dispositivo { Id = "e5d4b6ac-fb4b-45ad-8a2f-bf82d30df25b", Nome = "Linha de Produção 1", AmbienteId = 1, TipoDispositivoId = 1 },
+                new Dispositivo { Id = "1fdfbd0d-c0cf-4152-b186-db78eded1891", Nome = "Linha de Produção 2", AmbienteId = 1, TipoDispositivoId = 1 },
+                new Dispositivo { Id = "08378394-bd72-491a-bd7a-71771decdbc4", Nome = "Ar Condicionado", AmbienteId = 1, TipoDispositivoId = 1 },
+                new Dispositivo { Id = "fbe707c6-293e-4a01-b82b-bd832b537eed", Nome = "Ar Condicionado", AmbienteId = 2, TipoDispositivoId = 1 },
+                new Dispositivo { Id = "a63fea0c-f4bf-46f2-bf16-d2d7a24d7698", Nome = "Lâmpada", AmbienteId = 2, TipoDispositivoId = 1 }
             );
         }
     }
