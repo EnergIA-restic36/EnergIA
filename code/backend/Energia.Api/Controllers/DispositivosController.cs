@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Energia.Api.Controllers
 {    
-    public record DispositivoDto(string Id, string Nome, int AmbienteId, int TipoDipositivoId);
+    public record DispositivoDto(string Id, string Nome, int AmbienteId, int TipoDispositivoId);
 
     [ApiController]
     [Route("[controller]")]
@@ -32,7 +32,7 @@ namespace Energia.Api.Controllers
                 Id = dispositivo.Id,
                 Nome = dispositivo.Nome,
                 AmbienteId = dispositivo.AmbienteId,
-                TipoDispositivoId = dispositivo.TipoDipositivoId
+                TipoDispositivoId = dispositivo.TipoDispositivoId
             };
 
             await _dispositivoRepository.Add(dipositivoBd);

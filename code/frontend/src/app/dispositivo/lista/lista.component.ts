@@ -3,7 +3,7 @@ import * as signalR from '@microsoft/signalr';
 import { CardModule } from "primeng/card";
 import { DispositivoService } from "../dispositivo.service";
 import { Dispositivo } from "../models/dispositivo";
-import { map } from "rxjs";
+import { map, single } from "rxjs";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPlug } from '@fortawesome/free-solid-svg-icons';
 import { TooltipModule } from "primeng/tooltip";
@@ -21,6 +21,7 @@ import { MessageService } from "primeng/api";
     styleUrl: './lista.component.scss'
 })
 export class DispositivoComponent {
+    dispositivoId = signal("");
     dispositivoInclusao = viewChild.required(DispositivoInclusaoComponent);
     dispositivos = signal<Dispositivo[]>([]);
     dispositivoService = inject(DispositivoService);
@@ -35,18 +36,8 @@ export class DispositivoComponent {
         .withUrl("https://localhost:7158/energiaHub")
         .build();
 
+    
     constructor() {
-        this.dispositivoService.obterTodos()
-            .pipe(
-                map((response) => {
-                    return response.map(r => {
-                        return { ...r, consumo: 0, online: false, cadastrado: true }
-                    })
-                })
-            ).subscribe({
-                next: (retorno) => { this.dispositivos.set(retorno);}
-            });
-
         this.connection.on("DispositivosConectados", (dispositivosConectados: string[]) => {
             let dispositivosAtualizados = this.dispositivos();
             dispositivosConectados.forEach(id => {
@@ -130,7 +121,31 @@ export class DispositivoComponent {
         });
 
         this.connection.start()
-            .then(() => this.connection.send("ObterDispositivosConectados", this.connection.connectionId));
+            .then(() => this.atualizarDispositivos());
+
+        //this.atualizarDispositivos();
+    }
+
+    atualizarDispositivos()
+    {
+        this.dispositivoService.obterTodos()
+        .pipe(
+            map((response) => {
+                return response.map(r => {
+                    return { ...r, consumo: 0, online: false, cadastrado: true }
+                })
+            })
+        ).subscribe({
+            next: (retorno) => { 
+                this.dispositivos.set(retorno);
+                this.connection.send("ObterDispositivosConectados", this.connection.connectionId);
+            }
+        });
+    }
+
+    abrirModalIncluir(id: string) {
+        this.dispositivoId.set(id);    
+        this.modalInclusao.set(true);
     }
 
     hideDialog() {
@@ -141,6 +156,7 @@ export class DispositivoComponent {
         if (resultado.sucesso) {        
             this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Dispositivo incluído com sucesso!', life: 3000 });
             this.hideDialog();
+            this.atualizarDispositivos();            
             return;
         }
         this.processarFalha(resultado.dados);

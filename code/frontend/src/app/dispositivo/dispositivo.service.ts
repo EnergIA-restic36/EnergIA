@@ -21,6 +21,7 @@ export class DispositivoService extends BaseService {
     }
 
     incluir(dispositivo: DispositivoInclusao) {
+        console.log(dispositivo);
         return this.http.post<Dispositivo>(this.urlApi, dispositivo)
             .pipe(
                 catchError(this.serviceError),

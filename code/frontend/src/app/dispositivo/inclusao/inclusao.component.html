@@ -1,24 +1,39 @@
-<div class="field">
-    <label for="nome">Id <span class="obrigatorio">*</span></label>
-    <input type="text" pInputText [(ngModel)]="dispositivo().id" required autofocus id="id" [ngClass]="{ 'ng-invalid ng-dirty': submitted() && !dispositivo().nome }" />
 
-    @if (submitted() && !dispositivo().nome) {
-    <small class="p-error block">Informe o nome</small>
-    }
-</div>
-<div class="field">
-    <label for="nome">Nome <span class="obrigatorio">*</span></label>
-    <input type="text" pInputText [(ngModel)]="dispositivo().nome" required autofocus id="nome" [ngClass]="{ 'ng-invalid ng-dirty': submitted() && !dispositivo().nome }" />
+    <form novalidate (ngSubmit)="gravar()" [formGroup]="dispositivoForm" class="p-fluid form" pFocusTrap>
+        <div class="field">
+            <label for="id">Id <span class="obrigatorio">*</span></label>
+            @if (dispositivoForm.get('id')) {
+                <input type="text" pInputText formControlName="id" required autofocus id="id" readonly />
+            } @else {
+                <input type="text" pInputText formControlName="id" required autofocus id="id" />
+            }
+            
+            @if (dispositivoForm.get('id')?.invalid && (dispositivoForm.get('id')?.touched || submitted())) {
+                <small class="p-error block">Informe o id</small>
+            }
+        </div>
+        <div class="field">
+            <label for="nome">Nome <span class="obrigatorio">*</span></label>
+            <input type="text" pInputText formControlName="nome" required autofocus id="nome" />
 
-    @if (submitted() && !dispositivo().nome) {
-    <small class="p-error block">Informe o nome</small>
-    }
-</div>
-<div class="field">
-    <label for="nome">Ambiente <span class="obrigatorio">*</span></label>
-    <p-dropdown class="p-dropdown-item w-full" [options]="ambientes" appendTo="body" id="ambienteId" placeholder="Selecione um ambiente" optionLabel="nome" optionValue="id"></p-dropdown>        
-</div>
-<div class="field">
-    <label for="nome">Tipo <span class="obrigatorio">*</span></label>
-    <p-dropdown class="p-dropdown-item w-full" [options]="tiposDispositivos" appendTo="body" id="ambienteId" placeholder="Selecione um tipo" optionLabel="nome" optionValue="id"></p-dropdown>        
-</div>
+            @if (dispositivoForm.get('nome')?.invalid && (dispositivoForm.get('nome')?.touched || submitted())) {
+                <small class="p-error block">Informe o nome</small>
+            }
+        </div>
+        <div class="field">
+            <label for="ambienteId">Ambiente <span class="obrigatorio">*</span></label>
+            <p-dropdown class="p-dropdown-item w-full" formControlName="ambienteId" [options]="ambientes" appendTo="body" id="ambienteId" placeholder="Selecione um ambiente" optionLabel="nome" optionValue="id"></p-dropdown>
+
+            @if (dispositivoForm.get('ambienteId')?.invalid && (dispositivoForm.get('ambienteId')?.touched || submitted())) {
+                <small class="p-error block">Selecione um ambiente</small>
+            }
+        </div>
+        <div class="field">
+            <label for="tipoDispositivoId">Tipo <span class="obrigatorio">*</span></label>
+            <p-dropdown class="p-dropdown-item w-full" formControlName="tipoDispositivoId" [options]="tiposDispositivos" appendTo="body" id="tipoDispositivoId" placeholder="Selecione um tipo" optionLabel="nome" optionValue="id"></p-dropdown>
+
+            @if (dispositivoForm.get('tipoDispositivoId')?.invalid && (dispositivoForm.get('tipoDispositivoId')?.touched || submitted())) {
+                <small class="p-error block">Selecione um tipo</small>
+            }
+        </div>
+    </form>

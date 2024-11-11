@@ -14,7 +14,11 @@
                 @if (item.online) {
                     <div class="status">
                         <i class="pi pi-circle-on" style="color: green;"></i>
-                        <span [title]=[item.nome]>{{item.nome}}</span>
+                        @if(item.cadastrado) {
+                            <span [title]=[item.nome]>{{item.nome}}</span>
+                        } @else {
+                            <span [title]=[item.nome]><a href="javascript:void(0);" (click)="abrirModalIncluir(item.id)">{{item.nome}}</a></span>
+                        }
                     </div>
                 } @else {
                     <div class="status">
@@ -45,7 +49,7 @@
 
 <p-dialog [(visible)]="modalInclusao" [style]="{ width: '450px' }" header="Inclusão de Dispositivo" [modal]="true" class="p-fluid">
     <ng-template pTemplate="content">
-        <app-dispositivo-inclusao (onSave)="processarInclusao($event)" />
+        <app-dispositivo-inclusao (onSave)="processarInclusao($event)" [dispositivoId]="dispositivoId()" />
     </ng-template>
     <ng-template pTemplate="footer">
         <button pButton pRipple label="Fechar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
