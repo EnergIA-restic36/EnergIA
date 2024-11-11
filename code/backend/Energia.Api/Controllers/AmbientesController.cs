@@ -1,11 +1,13 @@
 ﻿using Energia.Api.Models;
 using Energia.Api.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Energia.Api.Controllers
 {
     public record AmbienteDto(string Nome);
-
+    
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class AmbientesController : ControllerBase

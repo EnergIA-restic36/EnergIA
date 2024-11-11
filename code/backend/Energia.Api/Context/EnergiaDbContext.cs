@@ -1,14 +1,18 @@
 ﻿using Energia.Api.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Energia.Api.Context
 {
-    public class EnergiaDbContext : DbContext
+    public class EnergiaDbContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<Consumo> Consumos { get; set; }
         public DbSet<Ambiente> Ambientes { get; set; }
         public DbSet<TipoDispositivo> TiposDispositivo { get; set; }
         public DbSet<Dispositivo> Dispositivos { get; set; }
+
+        public EnergiaDbContext(DbContextOptions<EnergiaDbContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -37,6 +41,26 @@ namespace Energia.Api.Context
                 new Dispositivo { Id = "fbe707c6-293e-4a01-b82b-bd832b537eed", Nome = "Ar Condicionado", AmbienteId = 2, TipoDispositivoId = 1 },
                 new Dispositivo { Id = "a63fea0c-f4bf-46f2-bf16-d2d7a24d7698", Nome = "Lâmpada", AmbienteId = 2, TipoDispositivoId = 1 }
             );
+
+            var hasher = new PasswordHasher<IdentityUser>();
+            var senha = hasher.HashPassword(null, "admin");
+
+            modelBuilder.Entity<IdentityUser>().HasData(
+                new IdentityUser
+                {
+                    Id = "9387ff99-15c1-4929-8ca8-8c2ccbd23d4a",
+                    AccessFailedCount = 0,
+                    ConcurrencyStamp = "08a84b30-11d3-4d33-b73b-8ef1d0277a88",
+                    UserName = "admin",
+                    NormalizedUserName = "ADMIN",
+                    Email = "admin@energia.com.br",
+                    NormalizedEmail = "ADMIN@ENERGIA.COM.BR",
+                    LockoutEnabled = false,
+                    PasswordHash = senha
+                });
+
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
