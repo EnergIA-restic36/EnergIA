@@ -13,18 +13,19 @@ namespace Energia.Api.Controllers
     [Route("[controller]")]
     public class AuthController : Controller
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public AuthController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
+        public AuthController(UserManager<IdentityUser> userManager)
         {
-            _signInManager = signInManager;
             _userManager = userManager;
         }
 
         [HttpPost("entrar")]
-        public async Task<ActionResult> Login(LoginUserViewModel loginUser)
+        public async Task<IActionResult> Login(LoginUserViewModel loginUser)
         {
+            if (loginUser is null)
+                return BadRequest("Login ou senha inválidos");
+
             var user = await _userManager.FindByNameAsync(loginUser.Login);
             if (user != null && await _userManager.CheckPasswordAsync(user, loginUser.Password))
             {
@@ -32,18 +33,18 @@ namespace Energia.Api.Controllers
                 var key = Encoding.ASCII.GetBytes("OGynApWowsX1sT8vSYfELf6kVxgjoe9V");
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
-                    Subject = new ClaimsIdentity(new Claim[]
-                    {
+                    Subject = new ClaimsIdentity(
+                    [
                         new Claim(ClaimTypes.Name, user.UserName)
-                    }),
+                    ]),
                     Expires = DateTime.UtcNow.AddHours(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                 };
                 var token = tokenHandler.CreateToken(tokenDescriptor);
-                return Ok(new { Token = tokenHandler.WriteToken(token) });
+                return Ok(tokenHandler.WriteToken(token));
             }
 
-            return Unauthorized("Usuário ou senha incorretos");
+            return BadRequest("Login ou senha incorretos");
         }
     }
 }
