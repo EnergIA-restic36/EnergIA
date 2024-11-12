@@ -1,4 +1,7 @@
 <form novalidate (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="p-fluid form" pFocusTrap>
+    <div>
+        <h1>Faça Login</h1>
+    </div>
     <div class="field">
         <label>Login</label>
         <input pInputText formControlName="login" required autofocus />
@@ -10,7 +13,7 @@
         <label>Senha</label>
         <input pInputText formControlName="senha" required autofocus />
         @if (loginForm.get('senha')?.invalid && (loginForm.get('senha')?.touched || submitted())) {
-        <small class="p-error block">Informe o senha</small>
+        <small class="p-error block">Informe a senha</small>
         }
     </div>
     <div class="field col-12">

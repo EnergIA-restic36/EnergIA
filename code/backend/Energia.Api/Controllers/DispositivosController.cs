@@ -1,11 +1,13 @@
 ﻿using Energia.Api.Models;
 using Energia.Api.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Energia.Api.Controllers
 {    
     public record DispositivoDto(string Id, string Nome, int AmbienteId, int TipoDispositivoId);
 
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class DispositivosController : ControllerBase
