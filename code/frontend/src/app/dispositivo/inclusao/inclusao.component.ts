@@ -1,5 +1,4 @@
-import { NgClass } from '@angular/common';
-import { Component, inject, Input, input, OnInit, output, signal, SimpleChanges } from '@angular/core';
+import { Component, inject, input, output, signal, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
@@ -9,7 +8,6 @@ import { Ambiente } from '../../ambiente/models/ambiente';
 import { TipoDispositivo } from '../../tipo-dispositivo/models/tipo-dispositivo';
 import { TipoDispositivoService } from '../../tipo-dispositivo/tipo-dispositivo.service';
 import { DispositivoService } from '../dispositivo.service';
-import { DispositivoInclusao } from '../models/dispositivo-inclusao';
 
 @Component({
     selector: 'app-dispositivo-inclusao',
@@ -56,8 +54,7 @@ export class DispositivoInclusaoComponent {
     gravar() {
         this.submitted.set(true);
         if (!this.dispositivoForm.valid) {
-            return;
-            
+            return;            
         }
         
         const dispositivo = this.dispositivoForm.value;

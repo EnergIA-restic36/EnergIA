@@ -122,8 +122,6 @@ export class DispositivoComponent {
 
         this.connection.start()
             .then(() => this.atualizarDispositivos());
-
-        //this.atualizarDispositivos();
     }
 
     atualizarDispositivos()
@@ -154,6 +152,7 @@ export class DispositivoComponent {
 
     processarInclusao(resultado: any) {
         if (resultado.sucesso) {        
+            this.dispositivoId.set("");
             this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Dispositivo incluído com sucesso!', life: 3000 });
             this.hideDialog();
             this.atualizarDispositivos();            

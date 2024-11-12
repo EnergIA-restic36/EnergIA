@@ -2,7 +2,7 @@
     <form novalidate (ngSubmit)="gravar()" [formGroup]="dispositivoForm" class="p-fluid form" pFocusTrap>
         <div class="field">
             <label for="id">Id <span class="obrigatorio">*</span></label>
-            @if (dispositivoForm.get('id')) {
+            @if (dispositivoId()) {
                 <input type="text" pInputText formControlName="id" required autofocus id="id" readonly />
             } @else {
                 <input type="text" pInputText formControlName="id" required autofocus id="id" />
