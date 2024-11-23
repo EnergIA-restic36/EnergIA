@@ -6,9 +6,8 @@ namespace Energia.WebSocket
     public record ConsumoDto(string DispositivoId, double ConsumoMedido, DateTime Timestamp);
     public record DispositivoConectado(string Id, string ConnectionId);
 
-    public class EnergiaHub(EnergiaDbContext context) : Hub
+    public class EnergiaHub() : Hub
     {
-        private readonly EnergiaDbContext _context = context;
         private static readonly ConcurrentDictionary<string, string> _dispositivoConectados = new();
 
         public override async Task OnDisconnectedAsync(Exception? exception)
@@ -23,23 +22,16 @@ namespace Energia.WebSocket
         {
             try
             {
-                //var consumo = new Consumo
-                //{
-                //    DispositivoId = dados.DispositivoId,
-                //    ConsumoMedido = dados.ConsumoMedido,
-                //    Timestamp = dados.Timestamp
-                //};
-                //_context.Consumos.Add(consumo);
-                //await _context.SaveChangesAsync();
-                await Clients.All.SendAsync("Consumo", dados.DispositivoId, dados.ConsumoMedido);
-                Console.WriteLine($"Dados Recebidos. Consumido {dados.ConsumoMedido} kWh em {dados.Timestamp}.");
+                await Clients.All.SendAsync("Consumo", dados.DispositivoId, dados.ConsumoMedido, dados.Timestamp);
 
+#if DEBUG
+                 Console.WriteLine($"Dados Recebidos. Consumido {dados.ConsumoMedido} kWh em {dados.Timestamp}.");
+#endif
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Erro {ex.Message}");
             }            
-
         }
 
         public async Task NovoDispositivo(string dispositivoId, string connectionId)
@@ -51,6 +43,14 @@ namespace Energia.WebSocket
         public async Task ObterDispositivosConectados(string connectionId)
         {
             await Clients.Client(connectionId).SendAsync("DispositivosConectados", _dispositivoConectados.Values.ToList());            
+        }
+
+        public override Task OnConnectedAsync()
+        {
+#if DEBUG
+            Console.WriteLine($"Dispositivo Conectado {Context.ConnectionId}");
+#endif
+            return base.OnConnectedAsync();
         }
     }
 }

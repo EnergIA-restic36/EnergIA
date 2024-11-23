@@ -10,7 +10,7 @@ namespace Energia.SensorMock
 
         private Timer? _timer = null;
         private readonly HubConnection _connection = new HubConnectionBuilder()
-                .WithUrl("https://localhost:7158/energiaHub")
+                .WithUrl(configuration.GetSection("WebSocketUrl").Get<string>() ?? "")
                 .WithAutomaticReconnect()
                 .Build();
 
@@ -26,7 +26,10 @@ namespace Energia.SensorMock
             await _connection.StartAsync(cancellationToken);
             await _connection.InvokeAsync("NovoDispositivo", dispositivoId, _connection.ConnectionId);
 
+#if DEBUG
             logger.LogInformation("Conexão com o Hub estabelecida.");
+#endif
+
             _timer = new Timer(EnviarDados, null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
         }
 
@@ -49,8 +52,11 @@ namespace Energia.SensorMock
 
             try
             {
-                await _connection.InvokeAsync("EnviarConsumo", consumo);                
+                await _connection.InvokeAsync("EnviarConsumo", consumo);
+
+#if DEBUG
                 logger.LogInformation($"Dados Enviados. Consumido {consumo.ConsumoMedido} kWh em {consumo.Timestamp}.");
+#endif
             }
             catch (Exception ex)
             {
@@ -60,7 +66,9 @@ namespace Energia.SensorMock
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
+#if DEBUG
             logger.LogInformation("Serviço parado");
+#endif
             _timer?.Change(Timeout.Infinite, 0);
 
             return Task.CompletedTask;

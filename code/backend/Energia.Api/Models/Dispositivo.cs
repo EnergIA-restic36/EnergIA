@@ -8,6 +8,5 @@
         public Ambiente Ambiente { get; set; }
         public int TipoDispositivoId { get; set; }
         public TipoDispositivo TipoDispositivo { get; set; }
-        public ICollection<Consumo> Consumos { get; set; }
     }
 }

@@ -1,9 +1,11 @@
 using Energia.Api.Context;
 using Energia.Api.Repositories;
+using Energia.Api.WebSocketClients;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +48,9 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader());
 });
 
+builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options => options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+builder.Services.AddSingleton<ConsumoWebSocketClient>();
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -65,7 +70,9 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
+
+var webSocketClientService = app.Services.GetRequiredService<ConsumoWebSocketClient>();
+await webSocketClientService.StartAsync();
 
 app.Run();
