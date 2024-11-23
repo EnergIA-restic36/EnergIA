@@ -3,13 +3,18 @@ using Energia.Api.Repositories;
 using Energia.Api.WebSocketClients;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<EnergiaDbContext>();
+
+//builder.Services.AddDbContext<EnergiaDbContext>(); //SQLITE
+builder.Services.AddDbContext<EnergiaDbContext>(options => 
+    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<EnergiaDbContext>()
     .AddDefaultTokenProviders();
