@@ -17,11 +17,10 @@ app.UseHttpsRedirection();
 
 app.UseCors(p =>
 {
-    p.WithOrigins("http://localhost:4200", "https://localhost:7061")
-    //p.AllowAnyOrigin()
+    //p.WithOrigins("http://localhost:4200", "https://localhost:7061")
+    p.AllowAnyOrigin()
     .AllowAnyHeader()
-    .AllowAnyMethod()
-    .AllowCredentials();
+    .AllowAnyMethod();
 });
 
 app.MapHub<EnergiaHub>("/energiaHub");

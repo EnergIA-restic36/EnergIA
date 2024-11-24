@@ -3,7 +3,6 @@ import { of, throwError } from "rxjs";
 
 export abstract class BaseService {
     protected serviceError(response: Response | any) {
-        debugger
         let customError: string[] = [];
         if (response instanceof HttpErrorResponse) {
             

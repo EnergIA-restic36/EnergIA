@@ -1,0 +1,54 @@
+services:
+  energia-api:
+    container_name: energia-api-container
+    build:
+        context: .
+        dockerfile: Energia.Api/Dockerfile
+    ports:
+        - 7061:8080
+    depends_on:
+        energia-bd:
+            condition: service_healthy
+            restart: true
+        energia-websocket:
+            condition: service_started
+    networks:
+        energia-networks:
+   
+  energia-websocket:
+    container_name: energia-websocket-container
+    build:
+        context: .
+        dockerfile: Energia.WebSocket/Dockerfile
+    ports:
+        - 7158:8081
+    networks:
+        energia-networks:
+    
+  energia-bd:
+    image: postgres
+    container_name: energia-bd-container
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+    environment:
+        - "POSTGRES_PASSWORD=1234"
+    volumes:
+        - "energia-postgres:/dev/shm"
+    ports:
+        - 5432:5432
+    networks:
+        energia-networks:
+            aliases:
+                - "sql"
+                
+
+volumes:
+  energia-postgres:
+   
+networks:
+  energia-networks:
+    driver: bridge

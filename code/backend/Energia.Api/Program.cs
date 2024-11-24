@@ -10,10 +10,11 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-//builder.Services.AddDbContext<EnergiaDbContext>(); //SQLITE
-builder.Services.AddDbContext<EnergiaDbContext>(options => 
-    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
+builder.Services.AddDbContext<EnergiaDbContext>(options =>
+{
+    //options.UseSqlite("Data Source=db/energia_cosumo.db");
+    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection"));
+});
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<EnergiaDbContext>()
@@ -64,11 +65,14 @@ using (var scope = app.Services.CreateScope())
     dbContext.Database.EnsureCreated();
 }
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseCors();
 app.UseHttpsRedirection();
