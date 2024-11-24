@@ -14,17 +14,19 @@ namespace Energia.Api.Context
 
         public EnergiaDbContext(DbContextOptions<EnergiaDbContext> options) : base(options) { }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlite("Data Source=energia_cosumo.db");
-        }
+        //SQLITE
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlite("Data Source=energia_cosumo.db");
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Ambiente>().Property(a => a.Nome).IsRequired().HasColumnType("varchar").HasMaxLength(50);
             modelBuilder.Entity<TipoDispositivo>().Property(t => t.Nome).IsRequired().HasColumnType("varchar").HasMaxLength(50);
             modelBuilder.Entity<Dispositivo>().Property(d => d.Nome).IsRequired().HasColumnType("varchar").HasMaxLength(100);
-
+            modelBuilder.Entity<Consumo>().Property(c => c.Timestamp).HasColumnType("timestamp(6)");
+            
             modelBuilder.Entity<Ambiente>().HasData(
                 new Ambiente { Id = 1, Nome = "Produção" },
                 new Ambiente { Id = 2, Nome = "Administrativo" }

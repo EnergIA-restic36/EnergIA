@@ -4,46 +4,26 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSignalR();
 builder.Services.AddCors();
-builder.Services.AddDbContext<EnergiaDbContext>();
-
-//builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
-//builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options => options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var dbContext = scope.ServiceProvider.GetRequiredService<EnergiaDbContext>();
-    dbContext.Database.EnsureCreated();
-}
-
-//if (app.Environment.IsDevelopment())
+//using (var scope = app.Services.CreateScope())
 //{
-//    app.UseSwagger();
-//    app.UseSwaggerUI();
+//    var dbContext = scope.ServiceProvider.GetRequiredService<EnergiaDbContext>();
+//    dbContext.Database.EnsureCreated();
 //}
 
 app.UseHttpsRedirection();
 
 app.UseCors(p =>
 {
-    p.WithOrigins("http://localhost:4200")
+    p.WithOrigins("http://localhost:4200", "https://localhost:7061")
+    //p.AllowAnyOrigin()
     .AllowAnyHeader()
     .AllowAnyMethod()
     .AllowCredentials();
 });
 
 app.MapHub<EnergiaHub>("/energiaHub");
-
-//app.MapGet("/consumos", async (EnergiaDbContext context) =>
-//{
-//    var consumos = await context.Dispositivos
-//        .Include(d => d.TipoDipositivo)
-//        .Include(d => d.Ambiente)
-//        .Include(d => d.Consumos).ToListAsync();
-
-//    return Results.Ok(consumos);
-//}).WithName("consumos");
 
 app.Run();
