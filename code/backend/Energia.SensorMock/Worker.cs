@@ -30,7 +30,7 @@ namespace Energia.SensorMock
             logger.LogInformation("Conexão com o Hub estabelecida.");
 #endif
 
-            _timer = new Timer(EnviarDados, null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
+            _timer = new Timer(EnviarDados, null, TimeSpan.Zero, TimeSpan.FromSeconds(30));
         }
 
         private async void EnviarDados(object? state)

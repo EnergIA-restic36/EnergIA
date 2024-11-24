@@ -20,5 +20,12 @@ namespace Energia.Api.Controllers
             var consumos = await _consumoRepository.GetAll();
             return Ok(consumos);
         }
+
+        [HttpGet("{dispositivoId}")]
+        public async Task<IActionResult> ObterPorDipositivo(string dispositivoId)
+        {
+            var consumos = await _consumoRepository.ObterPorDispositivo(dispositivoId);
+            return Ok(consumos);
+        }
     }
 }
