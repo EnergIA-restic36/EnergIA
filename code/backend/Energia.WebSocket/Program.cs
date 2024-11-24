@@ -24,6 +24,8 @@ app.UseCors(p =>
     .AllowCredentials();
 });
 
+
+
 app.MapHub<EnergiaHub>("/energiaHub");
 
 app.Run();

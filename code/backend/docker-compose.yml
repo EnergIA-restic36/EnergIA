@@ -1,0 +1,70 @@
+services:
+  energia-api:
+    container_name: energia-api-container
+    build:
+        context: .
+        dockerfile: Energia.Api/Dockerfile
+    ports:
+        - 7061:8080
+    depends_on:
+        energia-bd:
+            condition: service_healthy
+            restart: true
+        energia-websocket:
+            condition: service_started
+    networks:
+        energia-networks:
+            aliases:
+                - "energiaapi"   
+   
+  energia-websocket:
+    container_name: energia-websocket-container
+    build:
+        context: .
+        dockerfile: Energia.WebSocket/Dockerfile
+    ports:
+        - 7158:8081
+    networks:
+        energia-networks:
+            aliases:
+                - "energiawebsocket"   
+   
+  energia-sensormock-1:
+    container_name: energia-sensormock-container1
+    build:
+        context: .
+        dockerfile: Energia.SensorMock/Dockerfile
+    depends_on:
+        energia-websocket:
+            condition: service_started
+    entrypoint: ["dotnet", "Energia.SensorMock.dll", "--id", "e5d4b6ac-fb4b-45ad-8a2f-bf82d30df25b"]
+    networks:
+        energia-networks:
+
+            
+  energia-bd:
+    image: postgres
+    container_name: energia-bd-container
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+    environment:
+        - "POSTGRES_PASSWORD=1234"
+    volumes:
+        - "energia-postgres:/dev/shm"
+    ports:
+        - 5432:5432
+    networks:
+        energia-networks:
+            aliases:
+                - "energiabd"                    
+
+volumes:
+  energia-postgres:
+   
+networks:
+  energia-networks:
+    driver: bridge
