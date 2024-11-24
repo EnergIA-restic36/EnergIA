@@ -14,6 +14,8 @@ services:
             condition: service_started
     networks:
         energia-networks:
+            aliases:
+                - "energiaapi"   
    
   energia-websocket:
     container_name: energia-websocket-container
@@ -24,7 +26,22 @@ services:
         - 7158:8081
     networks:
         energia-networks:
-    
+            aliases:
+                - "energiawebsocket"   
+   
+  energia-sensormock-1:
+    container_name: energia-sensormock-container1
+    build:
+        context: .
+        dockerfile: Energia.SensorMock/Dockerfile
+    depends_on:
+        energia-websocket:
+            condition: service_started
+    entrypoint: ["dotnet", "Energia.SensorMock.dll", "--id", "e5d4b6ac-fb4b-45ad-8a2f-bf82d30df25b"]
+    networks:
+        energia-networks:
+
+            
   energia-bd:
     image: postgres
     container_name: energia-bd-container
@@ -43,8 +60,7 @@ services:
     networks:
         energia-networks:
             aliases:
-                - "sql"
-                
+                - "energiabd"                    
 
 volumes:
   energia-postgres:
