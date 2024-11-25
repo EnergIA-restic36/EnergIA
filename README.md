@@ -2,6 +2,15 @@
 
 **EnergIA** é um sistema de monitoramento e gestão de energia inteligente, projetado para otimizar o uso de energia em tempo real. O sistema utiliza **Angular** para o frontend e **C# com ASP.NET Core** para o backend, oferecendo uma API para acessar dados de consumo e monitoramento, além de comunicação em tempo real via **SignalR** (WebSockets). O projeto conta ainda com um mock para gerar dados simulados de consumo de energia, proporcionando uma experiência realista de monitoramento.
 
+Pagina Login
+![image](https://github.com/user-attachments/assets/5b5c1bba-44da-49e7-bad1-d94a2bf16f68)
+
+
+Pagina Home
+
+![image](https://github.com/user-attachments/assets/0c65597a-8d53-4e27-a54d-d7c1c9a0f400)
+
+
 ## **Tecnologias Utilizadas**
 
 ### **Frontend:**
