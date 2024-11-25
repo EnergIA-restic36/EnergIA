@@ -77,11 +77,6 @@
 
 Utiliza **SignalR** para comunicação em tempo real entre o backend e o frontend, permitindo a atualização automática dos dados de consumo.
 
-## **Como Contribuir**
-
-1. Faça um fork do repositório.
-2. Crie uma branch com a sua feature.
-3. Envie um pull request com suas alterações.
 
 ## **Licença**
 
