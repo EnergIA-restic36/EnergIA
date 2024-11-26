@@ -33,29 +33,60 @@ Pagina Home
 
 ## **Instalação**
 
-### **Backend (C#)**
-
-1. Clone o repositório:
+Clone o repositório:
     ```bash
     git clone https://[github.com/usuario/energIA.git](https://github.com/EnergIA-restic36/EnergIA)
     ```
-
-2. Acesse a pasta do projeto:
+    
+### **Websocket (C#)**
+1. Acesse a pasta do projeto:
     ```bash
-    cd energIA/backend
+    cd energIA/backend/Energia.WebSocket
     ```
 
-3. Restaure as dependências:
+2. Restaure as dependências:
     ```bash
     dotnet restore
     ```
 
-4. Compile e execute o backend:
+3. Execute o backend:
     ```bash
     dotnet run
     ```
 
-   A API estará disponível em `http://localhost:5000`.
+### **Mock do Sensor (C#)**
+1. Acesse a pasta do projeto:
+    ```bash
+    cd energIA/backend/Energia.SensorMock
+    ```
+
+2. Restaure as dependências:
+    ```bash
+    dotnet restore
+    ```
+
+3. Execute o backend:
+    ```bash
+    dotnet run
+    ```
+
+### **API (C#)**
+1. Acesse a pasta do projeto:
+    ```bash
+    cd energIA/backend/Energia.Api
+    ```
+
+2. Restaure as dependências:
+    ```bash
+    dotnet restore
+    ```
+
+3. Execute o backend:
+    ```bash
+    dotnet run
+    ```    
+    
+A API estará disponível em `https://localhost:7061`.
 
 ### **Frontend (Angular)**
 
