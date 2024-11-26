@@ -65,9 +65,26 @@ Clone o repositório:
     dotnet restore
     ```
 
-3. Execute o backend:
+3. Execute o backend
+
+   O mock do sensor precisa passar o id na inicialização para registar o sensor. Pode ser um id de um sensor já cadastrado no banco de dados ou um id que ainda não exista.
+
+   **Para cada sensor que quiser simular é necessário executar uma instânca da aplicação Energia.SensorMock**
+
+   Alguns IDs já cadastrados:
+
+    e5d4b6ac-fb4b-45ad-8a2f-bf82d30df25b
+    
+    1fdfbd0d-c0cf-4152-b186-db78eded1891
+    
+    08378394-bd72-491a-bd7a-71771decdbc4
+    
+    fbe707c6-293e-4a01-b82b-bd832b537eed
+    
+    a63fea0c-f4bf-46f2-bf16-d2d7a24d7698
+   
     ```bash
-    dotnet run
+    dotnet run --id=e5d4b6ac-fb4b-45ad-8a2f-bf82d30df25b
     ```
 
 ### **API (C#)**
@@ -106,6 +123,10 @@ A API estará disponível em `https://localhost:7061`.
     ```
 
    O frontend estará disponível em `http://localhost:4200`.
+   
+   login: admin
+   
+   senha: admin
 
 ## **API - Endpoints**
 
