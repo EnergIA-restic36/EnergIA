@@ -23,7 +23,7 @@ services:
         context: .
         dockerfile: Energia.WebSocket/Dockerfile
     ports:
-        - 7158:8081
+        - 443:443
     networks:
         energia-networks:
             aliases:

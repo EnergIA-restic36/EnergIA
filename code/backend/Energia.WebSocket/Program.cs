@@ -17,7 +17,7 @@ app.UseHttpsRedirection();
 
 app.UseCors(p =>
 {
-    p.WithOrigins("http://localhost:4200", "https://localhost:7061")
+    p.WithOrigins("http://localhost:4200", "http://localhost:7061")
     //p.AllowAnyOrigin()
     .AllowAnyHeader()
     .AllowAnyMethod()

@@ -12,8 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<EnergiaDbContext>(options =>
 {
-    options.UseSqlite("Data Source=db/energia_cosumo.db");
-    //options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection"));
+    //options.UseSqlite("Data Source=db/energia_cosumo.db");
+    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection"));
 });
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
